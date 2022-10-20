@@ -1,8 +1,10 @@
 import './App.css';
 import Header from './Components/Header'
 import {useState} from 'react';
-import { degrees, PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import {PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import pdf from './form.pdf'
+import check from './check.png';
+
 
 
 function App() {
@@ -11,8 +13,9 @@ function App() {
   const [name,setName] = useState("");
   const [empId,setEmpId] = useState("");
   const [company,setCompany] = useState("");
-  const [father,setFather] = useState("");
   const [gender,setGender] = useState("");
+  const [fatherSpouse,setFatherSpouse] = useState("");
+  const [father,setFather] = useState("");
   const [marital,setMarital] = useState("");
   const [email,setEmail] = useState("");
   const [mobile,setMobile] = useState("");
@@ -21,8 +24,15 @@ function App() {
   const [aadhar,setAadhar] = useState("");
   const [pan,setPan] = useState("");
 
+  const [day,setDay] = useState("");
+  const [month,setMonth] = useState("");
+  const [year,setYear] = useState("");
+  var dob = "";
+
 
     async function modifyPdf() {
+
+        const checkMark = check;
         const url = pdf;
         const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
       
@@ -31,23 +41,130 @@ function App() {
       
         const pages = pdfDoc.getPages()
         const firstPage = pages[0]
-        const { width, height } = firstPage.getSize()
+       // const { width, height } = firstPage.getSize()
+
         firstPage.drawText(name, {
-          x: 400,
-          y: 712,
+          x: 415,
+          y: 710,
           size: 10,
           font: helveticaFont,
           color: rgb(0, 0, 0),
         })
+
+        firstPage.drawText(empId, {
+            x: 455,
+            y: 783,
+            size: 10,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          })
+
+          firstPage.drawText(company, {
+            x: 435,
+            y: 760,
+            size: 10,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          })
+
+          firstPage.drawText(gender, {
+            x: 415,
+            y: 653,
+            size: 10,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          })
+
+          firstPage.drawText(day, {
+            x: 395,
+            y: 670,
+            size: 10,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          })
+
+          firstPage.drawText(month, {
+            x: 460,
+            y: 670,
+            size: 10,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          })
+
+          firstPage.drawText(year, {
+            x: 515,
+            y: 670,
+            size: 10,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          })
+
+          if(fatherSpouse === "Father") {
+            const pngImageBytes = await fetch(checkMark).then((res) => res.arrayBuffer())
+            const pngImage = await pdfDoc.embedPng(pngImageBytes)
+            const pngDims = pngImage.scale(0.07)
+
+            firstPage.drawImage(pngImage, {
+                x: 115,
+                y: 694,
+                width: pngDims.width,
+                height: pngDims.height
+              })
+          }
+          else {
+            const pngImageBytes = await fetch(checkMark).then((res) => res.arrayBuffer())
+            const pngImage = await pdfDoc.embedPng(pngImageBytes)
+            const pngDims = pngImage.scale(0.07)
+
+            firstPage.drawImage(pngImage, {
+                x: 196,
+                y: 694,
+                width: pngDims.width,
+                height: pngDims.height
+              })
+          }
+
+          firstPage.drawText(father, {
+            x: 415,
+            y: 687,
+            size: 10,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          })
+
+          firstPage.drawText(marital, {
+            x: 415,
+            y: 638.5,
+            size: 10,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          })
+
+          firstPage.drawText(email, {
+            x: 415,
+            y: 622.5,
+            size: 10,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          })
+
+          firstPage.drawText(mobile, {
+            x: 415,
+            y: 609,
+            size: 10,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          })
       
-        const pdfBytes = await pdfDoc.save();
+    const pdfBytes = await pdfDoc.save();
 
     var blob = new Blob([pdfBytes], {type: "application/pdf"});
     var link = document.createElement("a");
     link.href = window.URL.createObjectURL(blob);
     link.download = `${name} Form 11.pdf`;
     link.click();
-  }  
+  } 
+  
 
   return (
     <div className="App">
@@ -72,47 +189,69 @@ function App() {
             <input required name="entry.419482644" onChange={(e) => setEmpId(e.target.value)} value={empId} type="text" placeholder="Enter it here"/>
         </div>
 
-
-     {/*   <div className="tooltip">
         <div className="Card">
             <h2>Company</h2>
             <input required name="entry.459872116" onChange={(e) => setCompany(e.target.value)} value={company} type="text" placeholder="Enter it here"/>
-            <span className="tooltiptext">Company you work for</span>
         </div>
-        </div>
-
-
-        <div className="tooltip">
-        <div className="Card">
-            <h2>Father's Name</h2>
-            <input required name="entry.348738897" onChange={(e) => setFather(e.target.value)} value={father} type="text" placeholder="Enter it here"/>
-            <span className="tooltiptext">Your father's Full Name</span>
-        </div>
-        </div>
-
 
         <div className="tooltip">
         <div className="Card">
             <h2>Gender</h2>
             <input required name="entry.1636074435" onChange={(e) => setGender(e.target.value)} value={gender} type="text" placeholder="Enter it here"/>
-            <span className="tooltiptext">Male/Female/Transgender</span>
+            <span className="tooltiptext">Options: Male,Female,Transgender</span>
         </div>
+        </div>
+
+        <h3 Style="color:white;font-size:20px;text-align:center;margin-bottom: 10px;">Date of Birth</h3>
+
+        <div className="birthday">
+
+        <div className="birthCard">
+            <h2>Day</h2>
+            <input required onChange={(e) => setDay(e.target.value)} value={day} type="number" placeholder="Enter it here"/>
+        </div>
+
+        <div className="birthCard">
+            <h2>Month (Number)</h2>
+            <input required onChange={(e) => setMonth(e.target.value)} value={month} type="number" placeholder="Enter it here"/>
+        </div>
+
+        <div className="birthCard">
+            <h2>Year</h2>
+            <input required onChange={(e) => setYear(e.target.value)} value={year} type="number" placeholder="Enter it here"/>
+        </div>
+
+        {dob = `${day}-${month}-${year}`} {console.log("Date of birth check is ", dob)}
+        <input Style="display:none;" name="entry.405382011" required value={dob} type="text"/>
+        </div>
+
+
+        <div className="FatherSpouse">
+            <div>
+                <input Style="margin-bottom: 20px;" type="radio" id="Father" name="entry.1382278419" onChange={(e) => setFatherSpouse(e.target.value)} value="Father"/>
+                <label Style="fontSize:15px; color:white; margin-left: 5px; margin-bottom: 20px;" for="Father">Father's Name</label><br/>
+                <input Style="margin-bottom: 20px;" type="radio" id="Spouse" name="entry.1382278419"onChange={(e) => setFatherSpouse(e.target.value)} value="Spouse"/>
+                <label Style="color:white; margin-left: 5px; margin-bottom: 20px;" for="Spouse">Spouse's Name</label><br/>
+            </div>
+
+        <div className="Card"> 
+            <h2>Name of the selected person</h2>
+            <input required name="entry.348738897" onChange={(e) => setFather(e.target.value)} value={father} type="text" placeholder="Enter it here"/>
+        </div>
+
         </div>
 
         <div className="tooltip">
         <div className="Card">
             <h2>Marital Status</h2>
             <input required name="entry.418814276" onChange={(e) => setMarital(e.target.value)} value={marital} type="text" placeholder="Enter it here"/>
-            <span className="tooltiptext">Married/Unmarried/Divorce/Widow</span>
+            <span className="tooltiptext">Options: Married, Unmarried, Divorce, Widow</span>
         </div>
         </div>
 
-        <div className="tooltip">
         <div className="Card">
             <h2>Email ID</h2>
             <input required name="entry.250229100" onChange={(e) => setEmail(e.target.value)} value={email} type="email" placeholder="Enter it here"/>
-            <span className="tooltiptext">Your main Email</span>
-        </div>
         </div>
 
         <div className="tooltip">
@@ -122,6 +261,16 @@ function App() {
             <span className="tooltiptext">No country code needed</span>
         </div>
         </div>
+
+
+       {/*
+
+
+        <div className="tooltip">
+        
+        </div>
+
+        
 
         <div className="tooltip">
         <div className="Card">
