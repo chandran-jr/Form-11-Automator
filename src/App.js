@@ -1,7 +1,8 @@
 import './App.css';
 import Header from './Components/Header'
 import {useState} from 'react';
-import { PDFDocument } from 'pdf-lib'
+import { degrees, PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import pdf from './form.pdf'
 
 
 function App() {
@@ -20,29 +21,32 @@ function App() {
   const [aadhar,setAadhar] = useState("");
   const [pan,setPan] = useState("");
 
-  async function fillForm() {
 
-    console.log("fillForm called");
-    console.log(name);
-    const formUrl = 'https://shielded-eyrie-92960.herokuapp.com/https://github.com/chandran-jr/Genie11/blob/main/PFForm11.pdf'
-    const formPdfBytes = await fetch(formUrl).then(res => res.arrayBuffer())
-
-    const pdfDoc = await PDFDocument.load(formPdfBytes)
-
-    const form = pdfDoc.getForm()
-
-    const nameField = form.getTextField('Name of the member')
-
-    nameField.setText(name)
-
-    const pdfBytes = await pdfDoc.save()
+    async function modifyPdf() {
+        const url = pdf;
+        const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
+      
+        const pdfDoc = await PDFDocument.load(existingPdfBytes)
+        const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
+      
+        const pages = pdfDoc.getPages()
+        const firstPage = pages[0]
+        const { width, height } = firstPage.getSize()
+        firstPage.drawText(name, {
+          x: 400,
+          y: 712,
+          size: 10,
+          font: helveticaFont,
+          color: rgb(0, 0, 0),
+        })
+      
+        const pdfBytes = await pdfDoc.save();
 
     var blob = new Blob([pdfBytes], {type: "application/pdf"});
     var link = document.createElement("a");
     link.href = window.URL.createObjectURL(blob);
-    link.download = "myFileName.pdf";
+    link.download = `${name} Form 11.pdf`;
     link.click();
-
   }  
 
   return (
@@ -58,24 +62,18 @@ function App() {
 
     <form method="POST" target="hidden_iframe" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdO_gQPp0kuOlx-zmlljqzwK0IUlghiJnVV0sF5CzaYlvhsHg/formResponse">
 
-     <div className="tooltip">
         <div className="Card">
             <h2>Name</h2>
             <input required name="entry.1011270989" onChange={(e) => setName(e.target.value)} value={name} type="text" placeholder="Enter it here"/>
-            <span className="tooltiptext">Your Full Name</span>
-        </div>
         </div>
 
-        <div className="tooltip">
         <div className="Card">
             <h2>Employee ID</h2>
             <input required name="entry.419482644" onChange={(e) => setEmpId(e.target.value)} value={empId} type="text" placeholder="Enter it here"/>
-            <span className="tooltiptext">Employee ID given by the company</span>
-        </div>
         </div>
 
 
-        <div className="tooltip">
+     {/*   <div className="tooltip">
         <div className="Card">
             <h2>Company</h2>
             <input required name="entry.459872116" onChange={(e) => setCompany(e.target.value)} value={company} type="text" placeholder="Enter it here"/>
@@ -157,9 +155,12 @@ function App() {
         </div>
         </div>
 
+        */}
+
         <div className="buttondiv">
-        <button onClick={fillForm} type="submit" className="submitbutton">Submit</button>
+        <button onClick={modifyPdf} type="submit" className="submitbutton">Submit</button>
         </div>
+
 
         </form>
 
