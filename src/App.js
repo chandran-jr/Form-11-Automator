@@ -23,16 +23,31 @@ function App() {
   const [ifsc,setIfsc] = useState("");
   const [aadhar,setAadhar] = useState("");
   const [pan,setPan] = useState("");
+  const [place,setPlace] = useState("");
+  const [sign,setSign] = useState();
 
   const [day,setDay] = useState("");
   const [month,setMonth] = useState("");
   const [year,setYear] = useState("");
-  var dob = "";
+
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+
+  today = dd + '-' + mm + '-' + yyyy;
+
+  const handleChange = (e) => {
+    if (e.target.files[0]) {
+      setSign(URL.createObjectURL(e.target.files[0]));
+    }
+  };
 
 
     async function modifyPdf() {
 
         const checkMark = check;
+        const signImg = sign;
         const url = pdf;
         const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
       
@@ -182,6 +197,34 @@ function App() {
             color: rgb(0, 0, 0),
           })
 
+          firstPage.drawText(today, {
+            x: 102,
+            y: 265,
+            size: 10,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          })
+
+          firstPage.drawText(place, {
+            x: 102,
+            y: 252,
+            size: 10,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          })
+
+          const signImageBytes = await fetch(signImg).then((res) => res.arrayBuffer())
+          const signImage = await pdfDoc.embedPng(signImageBytes)
+          const signDims = signImage.scale(0.16)
+
+          firstPage.drawImage(signImage, {
+              x: 480,
+              y: 260,
+              width: signDims.width,
+              height: signDims.height
+            })
+       
+
     const pdfBytes = await pdfDoc.save();
 
     var blob = new Blob([pdfBytes], {type: "application/pdf"});
@@ -247,8 +290,9 @@ function App() {
             <input required onChange={(e) => setYear(e.target.value)} value={year} type="number" placeholder="Enter it here"/>
         </div>
 
-        {dob = `${day}-${month}-${year}`} {console.log("Date of birth check is ", dob)}
-        <input Style="display:none;" name="entry.405382011" required value={dob} type="text"/>
+        
+        <input Style="display:none;" name="entry.405382011" required value={`${day}-${month}-${year}`} type="text"/>
+        <input Style="display:none;" name="entry.158974534" required value={today} type="text"/>
         </div>
 
 
@@ -256,7 +300,7 @@ function App() {
             <div>
                 <input Style="margin-bottom: 20px;" type="radio" id="Father" name="entry.1382278419" onChange={(e) => setFatherSpouse(e.target.value)} value="Father"/>
                 <label Style="fontSize:15px; color:white; margin-left: 5px; margin-bottom: 20px;" for="Father">Father's Name</label><br/>
-                <input Style="margin-bottom: 20px;" type="radio" id="Spouse" name="entry.1382278419"onChange={(e) => setFatherSpouse(e.target.value)} value="Spouse"/>
+                <input Style="margin-bottom: 20px;" type="radio" id="Spouse" name="entry.1382278419" onChange={(e) => setFatherSpouse(e.target.value)} value="Spouse"/>
                 <label Style="color:white; margin-left: 5px; margin-bottom: 20px;" for="Spouse">Spouse's Name</label><br/>
             </div>
 
@@ -308,32 +352,18 @@ function App() {
             <input name="entry.49499674" onChange={(e) => setPan(e.target.value)} value={pan} type="text" placeholder="Enter it here"/>
         </div>
 
-       {/*
-
-
-        <div className="tooltip">
-        
+        <div className="Card">
+            <h2>Place</h2>
+            <input name="entry.1784024502" onChange={(e) => setPlace(e.target.value)} value={place} type="text" placeholder="Enter it here"/>
         </div>
 
-        
-
-        <div className="tooltip">
-       
+        <div className="Card">
+            <h2>Upload Signature as Image (PNG)</h2>
+            <input type="file" onChange={handleChange} />
         </div>
 
-        <div className="tooltip">
-        
-        </div>
+        <img Style="align-items:center;justify-content:center;" alt="" src={sign} />
 
-        <div className="tooltip">
-        
-        </div>
-
-        <div className="tooltip">
-        
-        </div>
-
-        */}
 
         <div className="buttondiv">
         <button onClick={modifyPdf} type="submit" className="submitbutton">Submit</button>
