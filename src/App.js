@@ -155,7 +155,33 @@ function App() {
             font: helveticaFont,
             color: rgb(0, 0, 0),
           })
+
+          const bankifsc = `${bankacc}, ${ifsc}`;
+
+          firstPage.drawText(bankifsc, {
+            x: 415,
+            y: 407,
+            size: 10,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          })
+
+          firstPage.drawText(aadhar, {
+            x: 415,
+            y: 388,
+            size: 10,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          })
       
+          firstPage.drawText(pan, {
+            x: 415,
+            y: 369,
+            size: 10,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          })
+
     const pdfBytes = await pdfDoc.save();
 
     var blob = new Blob([pdfBytes], {type: "application/pdf"});
@@ -262,6 +288,25 @@ function App() {
         </div>
         </div>
 
+        <div className="Card">
+            <h2>Bank Account No.</h2>
+            <input required name="entry.697789802" onChange={(e) => setBankacc(e.target.value)} value={bankacc} type="text" placeholder="Enter it here"/>
+        </div>
+
+        <div className="Card">
+            <h2>IFSC Code</h2>
+            <input required name="entry.248146665" onChange={(e) => setIfsc(e.target.value)} value={ifsc} type="text" placeholder="Enter it here"/>
+        </div>
+
+        <div className="Card">
+            <h2>Aadhar Number</h2>
+            <input required name="entry.1518913305" onChange={(e) => setAadhar(e.target.value)} value={aadhar} type="text" placeholder="Enter it here"/>
+        </div>
+
+        <div className="Card">
+            <h2>Pan Card No.</h2>
+            <input name="entry.49499674" onChange={(e) => setPan(e.target.value)} value={pan} type="text" placeholder="Enter it here"/>
+        </div>
 
        {/*
 
@@ -273,35 +318,19 @@ function App() {
         
 
         <div className="tooltip">
-        <div className="Card">
-            <h2>Bank Account No.</h2>
-            <input required name="entry.697789802" onChange={(e) => setBankacc(e.target.value)} value={bankacc} type="text" placeholder="Enter it here"/>
-            <span className="tooltiptext">Your primary bank acc</span>
-        </div>
+       
         </div>
 
         <div className="tooltip">
-        <div className="Card">
-            <h2>IFSC Code</h2>
-            <input required name="entry.248146665" onChange={(e) => setIfsc(e.target.value)} value={ifsc} type="text" placeholder="Enter it here"/>
-            <span className="tooltiptext">IFCS Code of the bank acc you entered</span>
-        </div>
+        
         </div>
 
         <div className="tooltip">
-        <div className="Card">
-            <h2>Aadhar No</h2>
-            <input required name="entry.1518913305" onChange={(e) => setAadhar(e.target.value)} value={aadhar} type="text" placeholder="Enter it here"/>
-            <span className="tooltiptext">Should contain 12 digits</span>
-        </div>
+        
         </div>
 
         <div className="tooltip">
-        <div className="Card">
-            <h2>Pan Card No.</h2>
-            <input name="entry.49499674" onChange={(e) => setPan(e.target.value)} value={pan} type="text" placeholder="Enter it here"/>
-            <span className="tooltiptext">Enter if Available</span>
-        </div>
+        
         </div>
 
         */}
