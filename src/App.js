@@ -24,6 +24,8 @@ function App() {
   const [aadhar,setAadhar] = useState("");
   const [pan,setPan] = useState("");
   const [place,setPlace] = useState("");
+  const [provident,setProvident] = useState("");
+  const [pension,setPension] = useState("");
   const [sign,setSign] = useState();
 
   const [day,setDay] = useState("");
@@ -56,7 +58,6 @@ function App() {
       
         const pages = pdfDoc.getPages()
         const firstPage = pages[0]
-       // const { width, height } = firstPage.getSize()
 
         firstPage.drawText(name, {
           x: 415,
@@ -213,6 +214,56 @@ function App() {
             color: rgb(0, 0, 0),
           })
 
+          if(provident === "Yes") {
+            const pngImageBytes = await fetch(checkMark).then((res) => res.arrayBuffer())
+            const pngImage = await pdfDoc.embedPng(pngImageBytes)
+            const pngDims = pngImage.scale(0.04)
+
+            firstPage.drawImage(pngImage, {
+                x: 442,
+                y: 596,
+                width: pngDims.width,
+                height: pngDims.height
+              })
+          }
+          else {
+            const pngImageBytes = await fetch(checkMark).then((res) => res.arrayBuffer())
+            const pngImage = await pdfDoc.embedPng(pngImageBytes)
+            const pngDims = pngImage.scale(0.04)
+
+            firstPage.drawImage(pngImage, {
+                x: 520,
+                y: 596,
+                width: pngDims.width,
+                height: pngDims.height
+              })
+          }
+
+          if(pension === "Yes") {
+            const pngImageBytes = await fetch(checkMark).then((res) => res.arrayBuffer())
+            const pngImage = await pdfDoc.embedPng(pngImageBytes)
+            const pngDims = pngImage.scale(0.04)
+
+            firstPage.drawImage(pngImage, {
+                x: 442,
+                y: 583,
+                width: pngDims.width,
+                height: pngDims.height
+              })
+          }
+          else {
+            const pngImageBytes = await fetch(checkMark).then((res) => res.arrayBuffer())
+            const pngImage = await pdfDoc.embedPng(pngImageBytes)
+            const pngDims = pngImage.scale(0.04)
+
+            firstPage.drawImage(pngImage, {
+                x: 520,
+                y: 583,
+                width: pngDims.width,
+                height: pngDims.height
+              })
+          }
+
           const signImageBytes = await fetch(signImg).then((res) => res.arrayBuffer())
           const signImage = await pdfDoc.embedPng(signImageBytes)
           const signDims = signImage.scale(0.16)
@@ -297,6 +348,9 @@ function App() {
 
 
         <div className="FatherSpouse">
+
+          <h2 Style="margin-bottom:15px;color:white;">Name of Father / Spouse</h2>
+
             <div>
                 <input Style="margin-bottom: 20px;" type="radio" id="Father" name="entry.1382278419" onChange={(e) => setFatherSpouse(e.target.value)} value="Father"/>
                 <label Style="fontSize:15px; color:white; margin-left: 5px; margin-bottom: 20px;" for="Father">Father's Name</label><br/>
@@ -357,12 +411,34 @@ function App() {
             <input name="entry.1784024502" onChange={(e) => setPlace(e.target.value)} value={place} type="text" placeholder="Enter it here"/>
         </div>
 
+        <div className="FatherSpouse">
+        <h2 Style="margin-bottom:15px;color:white;">Whether earlier a member of Employees ‘Provident Fund Scheme 1952</h2>
+
+        <div>
+          <input Style="margin-bottom: 20px;" type="radio" id="Yes" name="entry.1382278419" onChange={(e) => setProvident(e.target.value)} value="Yes"/>
+          <label Style="fontSize:15px; color:white; margin-left: 5px; margin-bottom: 20px;" for="No">Yes</label><br/>
+          <input Style="margin-bottom: 20px;" type="radio" id="No" name="entry.1382278419" onChange={(e) => setProvident(e.target.value)} value="No"/>
+          <label Style="color:white; margin-left: 5px; margin-bottom: 20px;" for="No">No</label><br/>
+        </div>
+
+        </div>
+
+        <div className="FatherSpouse">
+        <h2 Style="margin-bottom:15px;color:white;">Whether earlier a member of Employees ‘Pension Scheme ,1995 </h2>
+
+        <div>
+          <input Style="margin-bottom: 20px;" type="radio" id="Yes" name="entry.1382278419" onChange={(e) => setPension(e.target.value)} value="Yes"/>
+          <label Style="fontSize:15px; color:white; margin-left: 5px; margin-bottom: 20px;" for="No">Yes</label><br/>
+          <input Style="margin-bottom: 20px;" type="radio" id="No" name="entry.1382278419" onChange={(e) => setPension(e.target.value)} value="No"/>
+          <label Style="color:white; margin-left: 5px; margin-bottom: 20px;" for="No">No</label><br/>
+        </div>
+
+        </div>
+
         <div className="Card">
             <h2>Upload Signature as Image (PNG)</h2>
             <input type="file" onChange={handleChange} />
         </div>
-
-        <img Style="align-items:center;justify-content:center;" alt="" src={sign} />
 
 
         <div className="buttondiv">
