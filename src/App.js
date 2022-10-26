@@ -26,11 +26,29 @@ function App() {
   const [place,setPlace] = useState("");
   const [provident,setProvident] = useState("");
   const [pension,setPension] = useState("");
+  const [uan,setUan] = useState("");
+  const [scheme,setScheme] = useState("");
+  const [ppo,setPpo] = useState("");
+  const [international,setInternational] = useState("");
+  const [country,setCountry] = useState("");
+  const [passport,setPassport] = useState("");
   const [sign,setSign] = useState();
 
-  const [day,setDay] = useState("");
-  const [month,setMonth] = useState("");
-  const [year,setYear] = useState("");
+  const [day,setDay] = useState(""); //for birthday
+  const [month,setMonth] = useState(""); //for birthday
+  const [year,setYear] = useState(""); //for birthday
+
+  const [exitDay,setExitDay] = useState(""); //job exit Day
+  const [exitMonth,setExitMonth] = useState(""); //job exit Day
+  const [exitYear,setExitYear] = useState(""); //job exit Day
+
+  const [fromDay,setFromDay] = useState(""); //passport validity Day
+  const [fromMonth,setFromMonth] = useState(""); //passport validity Day
+  const [fromYear,setFromYear] = useState(""); //passport validity Day
+
+  const [toDay,setToDay] = useState(""); //passport validity Day
+  const [toMonth,setToMonth] = useState(""); //passport validity Day
+  const [toYear,setToYear] = useState(""); //passport validity Day
 
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -276,6 +294,79 @@ function App() {
             })
        
 
+            firstPage.drawText(uan, {
+              x: 415,
+              y: 554,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(0, 0, 0),
+            })
+
+            firstPage.drawText(exitDay, {
+              x: 405,
+              y: 520,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(0, 0, 0),
+            })
+  
+            firstPage.drawText(exitMonth, {
+              x: 470,
+              y: 520,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(0, 0, 0),
+            })
+  
+            firstPage.drawText(exitYear, {
+              x: 535,
+              y: 520,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(0, 0, 0),
+            })
+
+            firstPage.drawText(scheme, {
+              x: 415,
+              y: 503,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(0, 0, 0),
+            })
+
+            firstPage.drawText(ppo, {
+              x: 415,
+              y: 487,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(0, 0, 0),
+            })
+
+            if(international === "Yes") {
+              const pngImageBytes = await fetch(checkMark).then((res) => res.arrayBuffer())
+              const pngImage = await pdfDoc.embedPng(pngImageBytes)
+              const pngDims = pngImage.scale(0.04)
+  
+              firstPage.drawImage(pngImage, {
+                  x: 442,
+                  y: 474,
+                  width: pngDims.width,
+                  height: pngDims.height
+                })
+            }
+            else {
+              const pngImageBytes = await fetch(checkMark).then((res) => res.arrayBuffer())
+              const pngImage = await pdfDoc.embedPng(pngImageBytes)
+              const pngDims = pngImage.scale(0.04)
+  
+              firstPage.drawImage(pngImage, {
+                  x: 520,
+                  y: 474,
+                  width: pngDims.width,
+                  height: pngDims.height
+                })
+            }
+            
     const pdfBytes = await pdfDoc.save();
 
     var blob = new Blob([pdfBytes], {type: "application/pdf"});
@@ -327,17 +418,17 @@ function App() {
         <div className="birthday">
 
         <div className="birthCard">
-            <h2>Day</h2>
+            <h2>Day (DD)</h2>
             <input required onChange={(e) => setDay(e.target.value)} value={day} type="number" placeholder="Enter it here"/>
         </div>
 
         <div className="birthCard">
-            <h2>Month (Number)</h2>
+            <h2>Month (MM)</h2>
             <input required onChange={(e) => setMonth(e.target.value)} value={month} type="number" placeholder="Enter it here"/>
         </div>
 
         <div className="birthCard">
-            <h2>Year</h2>
+            <h2>Year (YYYY)</h2>
             <input required onChange={(e) => setYear(e.target.value)} value={year} type="number" placeholder="Enter it here"/>
         </div>
 
@@ -387,7 +478,7 @@ function App() {
         </div>
 
         <div className="Card">
-            <h2>Bank Account No.</h2>
+            <h2>Bank Account Number</h2>
             <input required name="entry.697789802" onChange={(e) => setBankacc(e.target.value)} value={bankacc} type="text" placeholder="Enter it here"/>
         </div>
 
@@ -402,7 +493,7 @@ function App() {
         </div>
 
         <div className="Card">
-            <h2>Pan Card No.</h2>
+            <h2>Pan Card Number</h2>
             <input name="entry.49499674" onChange={(e) => setPan(e.target.value)} value={pan} type="text" placeholder="Enter it here"/>
         </div>
 
@@ -411,13 +502,18 @@ function App() {
             <input name="entry.1784024502" onChange={(e) => setPlace(e.target.value)} value={place} type="text" placeholder="Enter it here"/>
         </div>
 
+        <div className="Card">
+            <h2>Upload Signature as Image (PNG)</h2>
+            <input type="file" onChange={handleChange} />
+        </div>
+
         <div className="FatherSpouse">
         <h2 Style="margin-bottom:15px;color:white;">Whether earlier a member of Employees ‘Provident Fund Scheme 1952</h2>
 
         <div>
-          <input Style="margin-bottom: 20px;" type="radio" id="Yes" name="entry.1382278419" onChange={(e) => setProvident(e.target.value)} value="Yes"/>
+          <input Style="margin-bottom: 20px;" type="radio" id="Yes" name="entry.2018860065" onChange={(e) => setProvident(e.target.value)} value="Yes"/>
           <label Style="fontSize:15px; color:white; margin-left: 5px; margin-bottom: 20px;" for="No">Yes</label><br/>
-          <input Style="margin-bottom: 20px;" type="radio" id="No" name="entry.1382278419" onChange={(e) => setProvident(e.target.value)} value="No"/>
+          <input Style="margin-bottom: 20px;" type="radio" id="No" name="entry.2018860065" onChange={(e) => setProvident(e.target.value)} value="No"/>
           <label Style="color:white; margin-left: 5px; margin-bottom: 20px;" for="No">No</label><br/>
         </div>
 
@@ -427,18 +523,124 @@ function App() {
         <h2 Style="margin-bottom:15px;color:white;">Whether earlier a member of Employees ‘Pension Scheme ,1995 </h2>
 
         <div>
-          <input Style="margin-bottom: 20px;" type="radio" id="Yes" name="entry.1382278419" onChange={(e) => setPension(e.target.value)} value="Yes"/>
+          <input Style="margin-bottom: 20px;" type="radio" id="Yes" name="entry.1433124112" onChange={(e) => setPension(e.target.value)} value="Yes"/>
           <label Style="fontSize:15px; color:white; margin-left: 5px; margin-bottom: 20px;" for="No">Yes</label><br/>
-          <input Style="margin-bottom: 20px;" type="radio" id="No" name="entry.1382278419" onChange={(e) => setPension(e.target.value)} value="No"/>
+          <input Style="margin-bottom: 20px;" type="radio" id="No" name="entry.1433124112" onChange={(e) => setPension(e.target.value)} value="No"/>
+          <label Style="color:white; margin-left: 5px; margin-bottom: 20px;" for="No">No</label><br/>
+        </div>
+
+        </div>
+
+        <h2 Style="margin-bottom:15px;margin-top:20px;color:white;">If any of the above 2 answers are Yes, it is mandatory to fill up all the remaining questions</h2>
+
+        <div className="Card">
+            <h2>Universal Account Number</h2>
+            <input name="entry.1564645040" onChange={(e) => setUan(e.target.value)} value={uan} type="text" placeholder="Enter it here"/>
+        </div>
+
+        <h2 Style="margin-left:27%;margin-bottom:15px;margin-top:20px;color:white;">Date of exit from previous employment </h2>
+
+        <div className="birthday">
+
+        <div className="birthCard">
+            <h2>Day (DD)</h2>
+            <input required onChange={(e) => setExitDay(e.target.value)} value={exitDay} type="number" placeholder="Enter it here"/>
+        </div>
+
+        <div className="birthCard">
+            <h2>Month (MM)</h2>
+            <input required onChange={(e) => setExitMonth(e.target.value)} value={exitMonth} type="number" placeholder="Enter it here"/>
+        </div>
+
+        <div className="birthCard">
+            <h2>Year (YYYY)</h2>
+            <input required onChange={(e) => setExitYear(e.target.value)} value={exitYear} type="number" placeholder="Enter it here"/>
+        </div>
+
+        
+        <input Style="display:none;" name="entry.318591230" required value={`${exitDay}-${exitMonth}-${exitYear}`} type="text"/>
+        </div>
+
+        <div className="Card">
+            <h2>Scheme Certificate Number (if Issued )</h2>
+            <input name="entry.2085523964" onChange={(e) => setScheme(e.target.value)} value={scheme} type="text" placeholder="Enter it here"/>
+        </div>
+
+        <div className="Card">
+            <h2>Pension Payment Order Number (if Issued)</h2>
+            <input name="entry.1663452673" onChange={(e) => setPpo(e.target.value)} value={ppo} type="text" placeholder="Enter it here"/>
+        </div>
+
+        <div className="FatherSpouse">
+        <h2 Style="margin-bottom:15px;color:white;">International Worker</h2>
+
+        <div>
+          <input Style="margin-bottom: 20px;" type="radio" id="Yes" name="entry.1509082637" onChange={(e) => setInternational(e.target.value)} value="Yes"/>
+          <label Style="fontSize:15px; color:white; margin-left: 5px; margin-bottom: 20px;" for="No">Yes</label><br/>
+          <input Style="margin-bottom: 20px;" type="radio" id="No" name="entry.1509082637" onChange={(e) => setInternational(e.target.value)} value="No"/>
           <label Style="color:white; margin-left: 5px; margin-bottom: 20px;" for="No">No</label><br/>
         </div>
 
         </div>
 
         <div className="Card">
-            <h2>Upload Signature as Image (PNG)</h2>
-            <input type="file" onChange={handleChange} />
+            <h2>If yes, State Country Of Origin</h2>
+            <input name="entry.1673241747" onChange={(e) => setCountry(e.target.value)} value={country} type="text" placeholder="Enter it here"/>
         </div>
+
+        <div className="Card">
+            <h2>Passport Number</h2>
+            <input name="entry.183067661" onChange={(e) => setPassport(e.target.value)} value={passport} type="text" placeholder="Enter it here"/>
+        </div>
+
+
+        <h2 Style="margin-left:38%;margin-bottom:15px;margin-top:20px;color:white;">Validity of Passport</h2>
+
+        <h2 Style="margin-left:46%;margin-bottom:15px;margin-top:20px;color:white;">From</h2>
+
+        <div className="birthday">
+
+        <div className="birthCard">
+          <h2>Day (DD)</h2>
+          <input required onChange={(e) => setFromDay(e.target.value)} value={fromDay} type="number" placeholder="Enter it here"/>
+        </div>
+
+        <div className="birthCard">
+           <h2>Month (MM)</h2>
+           <input required onChange={(e) => setFromMonth(e.target.value)} value={fromMonth} type="number" placeholder="Enter it here"/>
+        </div>
+
+      <div className="birthCard">
+          <h2>Year (YYYY)</h2>
+          <input required onChange={(e) => setFromYear(e.target.value)} value={fromYear} type="number" placeholder="Enter it here"/>
+      </div>
+
+
+      <input Style="display:none;" name="entry.525328653" required value={`${fromDay}-${fromMonth}-${fromYear}`} type="text"/>
+      </div>
+
+      <h2 Style="margin-left:48%;margin-bottom:15px;margin-top:20px;color:white;">To</h2>
+
+      <div className="birthday">
+
+        <div className="birthCard">
+          <h2>Day (DD)</h2>
+          <input required onChange={(e) => setToDay(e.target.value)} value={toDay} type="number" placeholder="Enter it here"/>
+        </div>
+
+        <div className="birthCard">
+           <h2>Month (MM)</h2>
+           <input required onChange={(e) => setToMonth(e.target.value)} value={toMonth} type="number" placeholder="Enter it here"/>
+        </div>
+
+      <div className="birthCard">
+          <h2>Year (YYYY)</h2>
+          <input required onChange={(e) => setToYear(e.target.value)} value={toYear} type="number" placeholder="Enter it here"/>
+      </div>
+
+
+      <input Style="display:none;" name="entry.1995738681" required value={`${toDay}-${toMonth}-${toYear}`} type="text"/>
+      </div>
 
 
         <div className="buttondiv">
