@@ -485,7 +485,7 @@ function App() {
         </div>
         </div>
 
-        <h3 Style="color:white;font-size:20px;text-align:center;margin-bottom: 10px;">Date of Birth</h3>
+        <h3 Style="color:white;font-size:25px;text-align:center;margin-bottom: 10px;">Date of Birth</h3>
 
         <div className="birthday">
 
@@ -516,9 +516,9 @@ function App() {
 
             <div>
                 <input Style="margin-bottom: 20px;" type="radio" id="Father" name="entry.1382278419" onChange={(e) => setFatherSpouse(e.target.value)} value="Father"/>
-                <label Style="fontSize:15px; color:white; margin-left: 5px; margin-bottom: 20px;" for="Father">Father's Name</label><br/>
+                <label Style="font-size:20px; color:white; margin-left: 5px; margin-bottom: 20px;" for="Father">Father's Name</label><br/>
                 <input Style="margin-bottom: 20px;" type="radio" id="Spouse" name="entry.1382278419" onChange={(e) => setFatherSpouse(e.target.value)} value="Spouse"/>
-                <label Style="color:white; margin-left: 5px; margin-bottom: 20px;" for="Spouse">Spouse's Name</label><br/>
+                <label Style="font-size:20px;color:white; margin-left: 5px; margin-bottom: 20px;" for="Spouse">Spouse's Name</label><br/>
             </div>
 
         <div className="Card"> 
@@ -575,7 +575,7 @@ function App() {
         </div>
 
         <div className="Card">
-            <h2>Upload Signature as Image (PNG)</h2>
+            <h2>Upload Signature as Image (PNG ONLY)</h2>
             <input type="file" onChange={handleChange} />
         </div>
 
@@ -584,9 +584,9 @@ function App() {
 
         <div>
           <input Style="margin-bottom: 20px;" type="radio" id="Yes" name="entry.2018860065" onChange={(e) => setProvident(e.target.value)} value="Yes"/>
-          <label Style="fontSize:15px; color:white; margin-left: 5px; margin-bottom: 20px;" for="No">Yes</label><br/>
+          <label Style="font-size:20px;color:white; margin-left: 5px; margin-bottom: 20px;" for="No">Yes</label><br/>
           <input Style="margin-bottom: 20px;" type="radio" id="No" name="entry.2018860065" onChange={(e) => setProvident(e.target.value)} value="No"/>
-          <label Style="color:white; margin-left: 5px; margin-bottom: 20px;" for="No">No</label><br/>
+          <label Style="font-size:20px;color:white; margin-left: 5px; margin-bottom: 20px;" for="No">No</label><br/>
         </div>
 
         </div>
@@ -596,9 +596,9 @@ function App() {
 
         <div>
           <input Style="margin-bottom: 20px;" type="radio" id="Yes" name="entry.1433124112" onChange={(e) => setPension(e.target.value)} value="Yes"/>
-          <label Style="fontSize:15px; color:white; margin-left: 5px; margin-bottom: 20px;" for="No">Yes</label><br/>
+          <label Style="font-size:20px;color:white; margin-left: 5px; margin-bottom: 20px;" for="No">Yes</label><br/>
           <input Style="margin-bottom: 20px;" type="radio" id="No" name="entry.1433124112" onChange={(e) => setPension(e.target.value)} value="No"/>
-          <label Style="color:white; margin-left: 5px; margin-bottom: 20px;" for="No">No</label><br/>
+          <label Style="font-size:20px;color:white; margin-left: 5px; margin-bottom: 20px;" for="No">No</label><br/>
         </div>
 
         </div>
@@ -684,9 +684,9 @@ function App() {
 
         <div>
           <input Style="margin-bottom: 20px;" type="radio" id="Yes" name="entry.1509082637" onChange={(e) => setInternational(e.target.value)} value="Yes"/>
-          <label Style="fontSize:15px; color:white; margin-left: 5px; margin-bottom: 20px;" for="No">Yes</label><br/>
+          <label Style="font-size:20px;color:white; margin-left: 5px; margin-bottom: 20px;" for="No">Yes</label><br/>
           <input Style="margin-bottom: 20px;" type="radio" id="No" name="entry.1509082637" onChange={(e) => setInternational(e.target.value)} value="No"/>
-          <label Style="color:white; margin-left: 5px; margin-bottom: 20px;" for="No">No</label><br/>
+          <label Style="font-size:20px;color:white; margin-left: 5px; margin-bottom: 20px;" for="No">No</label><br/>
         </div>
 
         </div>
