@@ -50,6 +50,12 @@ function App() {
   const [toMonth,setToMonth] = useState(""); //passport validity Day
   const [toYear,setToYear] = useState(""); //passport validity Day
 
+  const [ap,setAp] = useState(""); //prev pf acc number
+  const [hyd,setHyd] = useState(""); //prev pf acc number
+  const[estCode,setEstCode] = useState(""); //prev pf acc number
+  const [extn,setExtn] = useState(""); //prev pf acc number
+  const [pfno,setPfno] = useState(""); //prev pf acc number
+
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -78,7 +84,7 @@ function App() {
         const firstPage = pages[0]
 
         firstPage.drawText(name, {
-          x: 415,
+          x: 390,
           y: 710,
           size: 10,
           font: helveticaFont,
@@ -102,7 +108,7 @@ function App() {
           })
 
           firstPage.drawText(gender, {
-            x: 415,
+            x: 390,
             y: 653,
             size: 10,
             font: helveticaFont,
@@ -159,7 +165,7 @@ function App() {
           }
 
           firstPage.drawText(father, {
-            x: 415,
+            x: 390,
             y: 687,
             size: 10,
             font: helveticaFont,
@@ -167,7 +173,7 @@ function App() {
           })
 
           firstPage.drawText(marital, {
-            x: 415,
+            x: 390,
             y: 638.5,
             size: 10,
             font: helveticaFont,
@@ -175,7 +181,7 @@ function App() {
           })
 
           firstPage.drawText(email, {
-            x: 415,
+            x: 390,
             y: 622.5,
             size: 10,
             font: helveticaFont,
@@ -183,7 +189,7 @@ function App() {
           })
 
           firstPage.drawText(mobile, {
-            x: 415,
+            x: 390,
             y: 609,
             size: 10,
             font: helveticaFont,
@@ -193,7 +199,7 @@ function App() {
           const bankifsc = `${bankacc}, ${ifsc}`;
 
           firstPage.drawText(bankifsc, {
-            x: 415,
+            x: 390,
             y: 407,
             size: 10,
             font: helveticaFont,
@@ -201,7 +207,7 @@ function App() {
           })
 
           firstPage.drawText(aadhar, {
-            x: 415,
+            x: 390,
             y: 388,
             size: 10,
             font: helveticaFont,
@@ -209,7 +215,7 @@ function App() {
           })
       
           firstPage.drawText(pan, {
-            x: 415,
+            x: 390,
             y: 369,
             size: 10,
             font: helveticaFont,
@@ -295,7 +301,7 @@ function App() {
        
 
             firstPage.drawText(uan, {
-              x: 415,
+              x: 390,
               y: 554,
               size: 10,
               font: helveticaFont,
@@ -327,7 +333,7 @@ function App() {
             })
 
             firstPage.drawText(scheme, {
-              x: 415,
+              x: 390,
               y: 503,
               size: 10,
               font: helveticaFont,
@@ -335,7 +341,7 @@ function App() {
             })
 
             firstPage.drawText(ppo, {
-              x: 415,
+              x: 390,
               y: 487,
               size: 10,
               font: helveticaFont,
@@ -366,9 +372,75 @@ function App() {
                   height: pngDims.height
                 })
             }
+
+
+            firstPage.drawText(country, {
+              x: 390,
+              y: 463,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(0, 0, 0),
+            })
             
+            firstPage.drawText(passport, {
+              x: 390,
+              y: 450,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(0, 0, 0),
+            })
+
+            firstPage.drawText(`${fromDay}/${fromMonth}/${fromYear} to ${toDay}/${toMonth}/${toYear}`, {
+              x: 390,
+              y: 439,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(0, 0, 0),
+            })
+
+            firstPage.drawText(ap, {
+              x: 372,
+              y: 537,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(0, 0, 0),
+            })
+
+            firstPage.drawText(hyd, {
+              x: 396,
+              y: 537,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(0, 0, 0),
+            })
+
+            firstPage.drawText(estCode, {
+              x: 436,
+              y: 537,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(0, 0, 0),
+            })
+
+            firstPage.drawText(extn, {
+              x: 492,
+              y: 537,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(0, 0, 0),
+            })
+
+            firstPage.drawText(pfno, {
+              x: 523,
+              y: 537,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(0, 0, 0),
+            })
+
     const pdfBytes = await pdfDoc.save();
 
+    // Downloading PDF automatically
     var blob = new Blob([pdfBytes], {type: "application/pdf"});
     var link = document.createElement("a");
     link.href = window.URL.createObjectURL(blob);
@@ -537,6 +609,42 @@ function App() {
             <h2>Universal Account Number</h2>
             <input name="entry.1564645040" onChange={(e) => setUan(e.target.value)} value={uan} type="text" placeholder="Enter it here"/>
         </div>
+
+        <h2 Style="margin-left:34%;margin-bottom:15px;margin-top:20px;color:white;">Previous PF account number</h2>
+
+      <div className="birthday">
+
+        <div className="birthCard">
+          <h2>AP</h2>
+          <input required onChange={(e) => setAp(e.target.value)} value={ap} type="text" placeholder="Enter it here"/>
+        </div>
+
+        <div className="birthCard">
+           <h2>HYD</h2>
+           <input required onChange={(e) => setHyd(e.target.value)} value={hyd} type="text" placeholder="Enter it here"/>
+        </div>
+
+      <div className="birthCard">
+          <h2>EST.CODE</h2>
+          <input required onChange={(e) => setEstCode(e.target.value)} value={estCode} type="text" placeholder="Enter it here"/>
+      </div>
+
+      </div>
+
+      <div className="birthday">
+
+      <div className="birthCard">
+          <h2>EXTN</h2>
+          <input required onChange={(e) => setExtn(e.target.value)} value={extn} type="text" placeholder="Enter it here"/>
+      </div>
+
+      <div className="birthCard">
+          <h2>PF NUMBER</h2>
+          <input required onChange={(e) => setPfno(e.target.value)} value={pfno} type="text" placeholder="Enter it here"/>
+      </div>
+
+      <input Style="display:none;" name="entry.240466885" required value={`${ap} ${hyd} ${estCode} ${extn} ${pfno}`} type="text"/>
+      </div>
 
         <h2 Style="margin-left:27%;margin-bottom:15px;margin-top:20px;color:white;">Date of exit from previous employment </h2>
 
