@@ -390,13 +390,15 @@ function App() {
               color: rgb(0, 0, 0),
             })
 
-            firstPage.drawText(`${fromDay}/${fromMonth}/${fromYear} to ${toDay}/${toMonth}/${toYear}`, {
-              x: 390,
-              y: 439,
-              size: 10,
-              font: helveticaFont,
-              color: rgb(0, 0, 0),
-            })
+            if(fromDay!==""){
+              firstPage.drawText(`${fromDay}/${fromMonth}/${fromYear} to ${toDay}/${toMonth}/${toYear}`, {
+                x: 390,
+                y: 439,
+                size: 10,
+                font: helveticaFont,
+                color: rgb(0, 0, 0),
+              })
+            }
 
             firstPage.drawText(ap, {
               x: 372,
@@ -467,23 +469,53 @@ function App() {
             <input required name="entry.1011270989" onChange={(e) => setName(e.target.value)} value={name} type="text" placeholder="Enter it here"/>
         </div>
 
+        <div Style="display:grid;place-items:center;margin-bottom:35px;">
+
+          <h2 Style="margin-bottom:35px;color:white;font-size:25px;">Company</h2>
+
+            <div Style="display:flex; justify-content:space-evenly; width:70%; margin-left: 50px;">
+      
+            <div>
+               <input Style="margin-bottom: 20px;" type="radio" id="Accubits Invent" name="entry.459872116" onChange={(e) => setCompany(e.target.value)} value="Accubits Invent"/>
+                <label Style="font-size:20px;color:white; margin-left: 5px; margin-bottom: 20px;" for="Accubits Invent">Accubits Invent</label><br/>
+            </div>
+
+            <div>
+              <input Style="margin-bottom: 20px;" type="radio" id="Accubits Technologies" name="entry.459872116" onChange={(e) => setCompany(e.target.value)} value="Accubits Technologies"/>
+              <label Style="font-size:20px; color:white; margin-left: 5px; margin-bottom: 20px;" for="Accubits Technologies">Accubits Technologies</label><br/>
+            </div>
+      
+          </div>
+      </div>
+
         <div className="Card">
             <h2>Employee ID</h2>
             <input required name="entry.419482644" onChange={(e) => setEmpId(e.target.value)} value={empId} type="text" placeholder="Enter it here"/>
         </div>
 
-        <div className="Card">
-            <h2>Company</h2>
-            <input required name="entry.459872116" onChange={(e) => setCompany(e.target.value)} value={company} type="text" placeholder="Enter it here"/>
+        <div Style="display:grid;place-items:center;margin-bottom:35px;">
+
+          <h2 Style="margin-bottom:35px;color:white;font-size:25px;">Gender</h2>
+
+            <div Style="display:flex; justify-content:space-evenly; width:70%; margin-left: 50px;">
+                <div>
+                <input Style="margin-bottom: 20px;" type="radio" id="Male" name="entry.1636074435" onChange={(e) => setGender(e.target.value)} value="Male"/>
+                <label Style="font-size:20px; color:white; margin-left: 5px; margin-bottom: 20px;" for="Male">Male</label><br/>
+                </div>
+                
+                <div>
+                <input Style="margin-bottom: 20px;" type="radio" id="Female" name="entry.1636074435" onChange={(e) => setGender(e.target.value)} value="Female"/>
+                <label Style="font-size:20px;color:white; margin-left: 5px; margin-bottom: 20px;" for="Female">Female</label><br/>
+                </div>
+                
+                <div>
+                <input Style="margin-bottom: 20px;" type="radio" id="Transgender" name="entry.1636074435" onChange={(e) => setGender(e.target.value)} value="Transgender"/>
+                <label Style="font-size:20px;color:white; margin-left: 5px; margin-bottom: 20px;" for="Female">Transgender</label><br/>
+                </div>
+                
+            </div>
         </div>
 
-        <div className="tooltip">
-        <div className="Card">
-            <h2>Gender</h2>
-            <input required name="entry.1636074435" onChange={(e) => setGender(e.target.value)} value={gender} type="text" placeholder="Enter it here"/>
-            <span className="tooltiptext">Options: Male,Female,Transgender</span>
-        </div>
-        </div>
 
         <h3 Style="color:white;font-size:25px;text-align:center;margin-bottom: 10px;">Date of Birth</h3>
 
@@ -528,13 +560,34 @@ function App() {
 
         </div>
 
-        <div className="tooltip">
-        <div className="Card">
-            <h2>Marital Status</h2>
-            <input required name="entry.418814276" onChange={(e) => setMarital(e.target.value)} value={marital} type="text" placeholder="Enter it here"/>
-            <span className="tooltiptext">Options: Married, Unmarried, Divorce, Widow</span>
-        </div>
-        </div>
+        <div Style="display:grid;place-items:center;margin-bottom:35px;">
+
+          <h2 Style="margin-bottom:35px;color:white;font-size:25px;">Marital Status</h2>
+
+            <div Style="display:flex; justify-content:space-evenly; width:70%;">
+      
+            <div>
+               <input Style="margin-bottom: 20px;" type="radio" id="Married" name="entry.418814276" onChange={(e) => setMarital(e.target.value)} value="Married"/>
+                <label Style="font-size:20px;color:white; margin-left: 5px; margin-bottom: 20px;" for="Married">Married</label><br/>
+            </div>
+
+            <div>
+              <input Style="margin-bottom: 20px;" type="radio" id="Unmarried" name="entry.418814276" onChange={(e) => setMarital(e.target.value)} value="Unmarried"/>
+              <label Style="font-size:20px; color:white; margin-left: 5px; margin-bottom: 20px;" for="Unmarried">Unmarried</label><br/>
+            </div>
+
+            <div>
+               <input Style="margin-bottom: 20px;" type="radio" id="Divorce" name="entry.418814276" onChange={(e) => setMarital(e.target.value)} value="Divorce"/>
+                <label Style="font-size:20px;color:white; margin-left: 5px; margin-bottom: 20px;" for="Divorce">Divorce</label><br/>
+            </div>
+
+            <div>
+               <input Style="margin-bottom: 20px;" type="radio" id="Widow" name="entry.418814276" onChange={(e) => setMarital(e.target.value)} value="Widow"/>
+                <label Style="font-size:20px;color:white; margin-left: 5px; margin-bottom: 20px;" for="Widow">Widow</label><br/>
+            </div>
+      
+          </div>
+      </div>
 
         <div className="Card">
             <h2>Email ID</h2>
@@ -616,17 +669,17 @@ function App() {
 
         <div className="birthCard">
           <h2>AP</h2>
-          <input required onChange={(e) => setAp(e.target.value)} value={ap} type="text" placeholder="Enter it here"/>
+          <input onChange={(e) => setAp(e.target.value)} value={ap} type="text" placeholder="Enter it here"/>
         </div>
 
         <div className="birthCard">
            <h2>HYD</h2>
-           <input required onChange={(e) => setHyd(e.target.value)} value={hyd} type="text" placeholder="Enter it here"/>
+           <input onChange={(e) => setHyd(e.target.value)} value={hyd} type="text" placeholder="Enter it here"/>
         </div>
 
       <div className="birthCard">
           <h2>EST.CODE</h2>
-          <input required onChange={(e) => setEstCode(e.target.value)} value={estCode} type="text" placeholder="Enter it here"/>
+          <input onChange={(e) => setEstCode(e.target.value)} value={estCode} type="text" placeholder="Enter it here"/>
       </div>
 
       </div>
@@ -635,12 +688,12 @@ function App() {
 
       <div className="birthCard">
           <h2>EXTN</h2>
-          <input required onChange={(e) => setExtn(e.target.value)} value={extn} type="text" placeholder="Enter it here"/>
+          <input onChange={(e) => setExtn(e.target.value)} value={extn} type="text" placeholder="Enter it here"/>
       </div>
 
       <div className="birthCard">
           <h2>PF NUMBER</h2>
-          <input required onChange={(e) => setPfno(e.target.value)} value={pfno} type="text" placeholder="Enter it here"/>
+          <input onChange={(e) => setPfno(e.target.value)} value={pfno} type="text" placeholder="Enter it here"/>
       </div>
 
       <input Style="display:none;" name="entry.240466885" required value={`${ap} ${hyd} ${estCode} ${extn} ${pfno}`} type="text"/>
@@ -652,17 +705,17 @@ function App() {
 
         <div className="birthCard">
             <h2>Day (DD)</h2>
-            <input required onChange={(e) => setExitDay(e.target.value)} value={exitDay} type="number" placeholder="Enter it here"/>
+            <input onChange={(e) => setExitDay(e.target.value)} value={exitDay} type="number" placeholder="Enter it here"/>
         </div>
 
         <div className="birthCard">
             <h2>Month (MM)</h2>
-            <input required onChange={(e) => setExitMonth(e.target.value)} value={exitMonth} type="number" placeholder="Enter it here"/>
+            <input onChange={(e) => setExitMonth(e.target.value)} value={exitMonth} type="number" placeholder="Enter it here"/>
         </div>
 
         <div className="birthCard">
             <h2>Year (YYYY)</h2>
-            <input required onChange={(e) => setExitYear(e.target.value)} value={exitYear} type="number" placeholder="Enter it here"/>
+            <input onChange={(e) => setExitYear(e.target.value)} value={exitYear} type="number" placeholder="Enter it here"/>
         </div>
 
         
@@ -670,7 +723,7 @@ function App() {
         </div>
 
         <div className="Card">
-            <h2>Scheme Certificate Number (if Issued )</h2>
+            <h2>Scheme Certificate Number (if Issued)</h2>
             <input name="entry.2085523964" onChange={(e) => setScheme(e.target.value)} value={scheme} type="text" placeholder="Enter it here"/>
         </div>
 
@@ -679,7 +732,10 @@ function App() {
             <input name="entry.1663452673" onChange={(e) => setPpo(e.target.value)} value={ppo} type="text" placeholder="Enter it here"/>
         </div>
 
+
         <div className="FatherSpouse">
+        <h2 Style="margin-bottom:15px;color:white;">Fill in the below information</h2>
+        
         <h2 Style="margin-bottom:15px;color:white;">International Worker</h2>
 
         <div>
@@ -710,17 +766,17 @@ function App() {
 
         <div className="birthCard">
           <h2>Day (DD)</h2>
-          <input required onChange={(e) => setFromDay(e.target.value)} value={fromDay} type="number" placeholder="Enter it here"/>
+          <input onChange={(e) => setFromDay(e.target.value)} value={fromDay} type="number" placeholder="Enter it here"/>
         </div>
 
         <div className="birthCard">
            <h2>Month (MM)</h2>
-           <input required onChange={(e) => setFromMonth(e.target.value)} value={fromMonth} type="number" placeholder="Enter it here"/>
+           <input onChange={(e) => setFromMonth(e.target.value)} value={fromMonth} type="number" placeholder="Enter it here"/>
         </div>
 
       <div className="birthCard">
           <h2>Year (YYYY)</h2>
-          <input required onChange={(e) => setFromYear(e.target.value)} value={fromYear} type="number" placeholder="Enter it here"/>
+          <input onChange={(e) => setFromYear(e.target.value)} value={fromYear} type="number" placeholder="Enter it here"/>
       </div>
 
 
@@ -733,17 +789,17 @@ function App() {
 
         <div className="birthCard">
           <h2>Day (DD)</h2>
-          <input required onChange={(e) => setToDay(e.target.value)} value={toDay} type="number" placeholder="Enter it here"/>
+          <input onChange={(e) => setToDay(e.target.value)} value={toDay} type="number" placeholder="Enter it here"/>
         </div>
 
         <div className="birthCard">
            <h2>Month (MM)</h2>
-           <input required onChange={(e) => setToMonth(e.target.value)} value={toMonth} type="number" placeholder="Enter it here"/>
+           <input onChange={(e) => setToMonth(e.target.value)} value={toMonth} type="number" placeholder="Enter it here"/>
         </div>
 
       <div className="birthCard">
           <h2>Year (YYYY)</h2>
-          <input required onChange={(e) => setToYear(e.target.value)} value={toYear} type="number" placeholder="Enter it here"/>
+          <input onChange={(e) => setToYear(e.target.value)} value={toYear} type="number" placeholder="Enter it here"/>
       </div>
 
 

@@ -1,6 +1,6 @@
 .Header {
-    height: 150px;
-    width: 75%;
+    height: 110px;
+    width: 65%;
     margin-top: 25px;
     display: grid;
     place-items: center;
@@ -10,7 +10,7 @@
 }
 
 .header__heading {
-    font-size: 65px;
+    font-size: 45px;
     color: white;
     margin-top: 10px;
     -webkit-text-stroke: 2px rgb(156, 6, 56);

@@ -4,7 +4,7 @@
 }
 
 .app__header {
-  height: 250px;
+  height: 180px;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -75,6 +75,7 @@
   font-size: 20px;
   outline: none;
   border: none;
+  display: inline-block;
 }
 
 .birthCard::-webkit-scrollbar {
@@ -133,12 +134,13 @@
   margin-top: 12px;
   margin-left: 8%;
   font-size: 24px;
+  display: inline-block;
 }
 
 .Card > input {
   margin-top: 18px;
   margin-left: 8%;
-  width: 200px;
+  width: 80%;
   height: 30px;
   padding: 5px;
   font-size: 20px;
