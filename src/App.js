@@ -1,6 +1,7 @@
 import './App.css';
 import Header from './Components/Header'
 import {useState} from 'react';
+import swal from 'sweetalert';
 import {PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import pdf from './form.pdf'
 import check from './check.png';
@@ -68,7 +69,6 @@ function App() {
       setSign(URL.createObjectURL(e.target.files[0]));
     }
   };
-
 
     async function modifyPdf() {
 
@@ -450,7 +450,43 @@ function App() {
     link.click();
 
 
-    alert("A PDF SHOULD BE DOWNLOADED OR PROMPTED TO DOWNLOAD BY NOW. IF NOT, CHECK IF THE SIGNATURE IS A PNG. DO CHECK IF ALL THE DATA IS CORRECTLY FILLED. ENJOY :)");
+    swal({title:"Woohoo!",text:"A PDF should be downloaded or prompted to.", icon:"success",
+      buttons: {
+        catch: {
+          text: "Ok",
+          value: "Ok",
+        },
+      },
+    })
+    .then((value) => {
+      switch (value) {
+     
+        case "Ok":
+          swal({title:"Small Alert",text:"Please do cross-check the data in the PDF!", icon:"warning",
+      buttons: {
+        catch: {
+          text: "Ok",
+          value: "Ok",
+        },
+      },
+    })
+    .then((value) => {
+      switch (value) {
+     
+        case "Ok":
+          swal({text: "Have a lovely day :)", button:"I will!!"});
+          break;
+
+        default:
+          swal("Alrighty!");
+      }
+    });
+          break;
+
+        default:
+          swal("Alrighty!");
+      }
+    });
   } 
   
 
@@ -631,8 +667,8 @@ function App() {
         </div>
 
         <div className="Card">
-            <h2>Upload Signature as Image (PNG ONLY)</h2>
-            <input type="file" onChange={handleChange} />
+            <h2>Upload Signature as Image (PNG ONLY)(500x300)</h2>
+            <input accept="image/png" type="file" onChange={handleChange} />
         </div>
 
         <div className="FatherSpouse">
