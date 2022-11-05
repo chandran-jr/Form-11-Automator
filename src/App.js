@@ -448,6 +448,9 @@ function App() {
     link.href = window.URL.createObjectURL(blob);
     link.download = `${name} Form 11.pdf`;
     link.click();
+
+
+    alert("A PDF SHOULD BE DOWNLOADED OR PROMPTED TO DOWNLOAD BY NOW. IF NOT, CHECK IF THE SIGNATURE IS A PNG. DO CHECK IF ALL THE DATA IS CORRECTLY FILLED. ENJOY :)");
   } 
   
 
