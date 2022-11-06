@@ -667,8 +667,8 @@ function App() {
         </div>
 
         <div className="Card">
-            <h2>Upload Signature as Image (PNG ONLY)(500x300)</h2>
-            <input accept="image/png" type="file" onChange={handleChange} />
+            <h2>Upload Signature as Image (PNG ONLY)(450x260)</h2>
+            <input required accept="image/png" type="file" onChange={handleChange} />
         </div>
 
         <div className="FatherSpouse">
